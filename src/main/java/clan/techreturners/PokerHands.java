@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PokerHands {
-    public enum Rank {UNKNOWN, HIGH_CARD, PAIR, TWO_PAIRS, THREE_OF_A_KIND, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_A_KIND;}
+    public enum Rank {UNKNOWN, HIGH_CARD, PAIR, TWO_PAIRS, THREE_OF_A_KIND, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_A_KIND, STRAIGHT_FLUSH;}
 
     HashMap<Character, Integer> cardValue = new HashMap<>();
 
@@ -54,6 +54,11 @@ public class PokerHands {
         // Check if hand contains 4 cards with the same value
         boolean isFourOfaKind = playerHand.values().stream().filter(suit -> suit.length() == 4).count() == 1 && countValues == 2;
 
+        // Check if hand contains 5 cards of the same suit with consecutive values
+        boolean isStraightFlush = isStraight && isSameSuit;
+
+        if (isStraightFlush)
+            return Rank.STRAIGHT_FLUSH;
         if (isFourOfaKind)
             return Rank.FOUR_OF_A_KIND;
         if (isFullHouse)
