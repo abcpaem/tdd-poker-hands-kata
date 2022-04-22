@@ -26,6 +26,7 @@ public class PokerHandsTests {
     @CsvSource(textBlock = """
             2H 3D 5S 9C KD, 2C 3H 4S 8C AH, Player 2 wins. With High card: Ace
             2H 4S 4C 2D 4H, 2S 8S AS QS 3S, Player 1 wins. With Full house: 4 over 2
+            2H 3D 5S 9C KD, 2C 3H 4S 8C KH, Player 1 wins. With High card: 9
             """)
     void checkWinnerForTwoHands(String firsthand, String secondHand, String expectedResult) {
         assertEquals(expectedResult, new PokerHands().getWinner(firsthand, secondHand));
