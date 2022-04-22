@@ -21,4 +21,12 @@ public class PokerHandsTests {
     void checkHandForRank(String hand, PokerHands.Rank expectedRank) {
         assertEquals(expectedRank, new PokerHands().getRank(hand));
     }
+
+    @ParameterizedTest(name = "{index}) For 2 hands: \"{0}\" and \"{1}\", the outcome is: {2}")
+    @CsvSource(textBlock = """
+            2H 3D 5S 9C KD, 2C 3H 4S 8C AH, Player 2 wins. With High card: Ace
+            """)
+    void checkWinnerForTwoHands(String firsthand, String secondHand, String expectedResult) {
+        assertEquals(expectedResult, new PokerHands().getWinner(firsthand, secondHand));
+    }
 }
