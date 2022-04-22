@@ -32,6 +32,7 @@ Instead of going straight to compare two poker hands as the suggested test cases
 4) Apply DRY principle and refactor all previous tests as parameterized tests. See all tests passing [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults04.html).
 5) Add test for *Three of a kind* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults05.html).
 6) Add test for *Straight* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults06.html).
+7) Add test for *Flush* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults07.html).
 
 
 ---
