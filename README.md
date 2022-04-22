@@ -39,6 +39,7 @@ Instead of going straight to compare two poker hands as the suggested test cases
 11) Add test for *Straight flush* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults11.html).
 12) Add test for *High Card* winner, between 2 poker hands. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults12.html).
 13) Refactor code to create *Player* inner class. See all tests passing [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults13.html).
+14) Add test for *Full house* winner. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults14.html).
 
 
 ---
