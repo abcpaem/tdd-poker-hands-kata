@@ -19,7 +19,7 @@ public class PokerHands {
     public String getWinner(String firsthand, String secondHand) {
         Player winner = getWinner(new Player(firsthand, "Player 1"), new Player(secondHand, "Player 2"));
 
-        return format("%s wins. With %s: %s", winner.name, winner.rank, winner.winningCards);
+        return winner == null ? "Tie." : format("%s wins. With %s: %s", winner.name, winner.rank, winner.winningCards);
     }
 
     public Rank getRank(String hand) {
