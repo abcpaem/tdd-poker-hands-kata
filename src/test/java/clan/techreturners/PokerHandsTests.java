@@ -15,6 +15,7 @@ public class PokerHandsTests {
             TH JS QD KC AD -> STRAIGHT
             2H 5H 3H 9H KH -> FLUSH
             2H 2S 2D KC KD -> FULL_HOUSE
+            2H 2S 2D 2C KD -> FOUR_OF_A_KIND
             """)
     void checkHandForRank(String hand, PokerHands.Rank expectedRank) {
         assertEquals(expectedRank, new PokerHands().getRank(hand));
