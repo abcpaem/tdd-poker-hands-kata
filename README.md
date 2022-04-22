@@ -30,6 +30,7 @@ Instead of going straight to compare two poker hands as the suggested test cases
 2) Add test for poker hand ranked as *Pair*. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults02.html).
 3) Add test for *Two Pairs* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults03.html).
 4) Apply DRY principle and refactor all previous tests as parameterized tests. See all tests passing [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults04.html).
+5) Add test for *Three of a kind* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults05.html).
 
 
 ---

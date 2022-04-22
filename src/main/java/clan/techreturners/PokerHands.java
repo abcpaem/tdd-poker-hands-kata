@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PokerHands {
-    public enum Rank {UNKNOWN, HIGH_CARD, PAIR, TWO_PAIRS;}
+    public enum Rank {UNKNOWN, HIGH_CARD, PAIR, TWO_PAIRS, THREE_OF_A_KIND;}
 
     HashMap<Character, Integer> cardValue = new HashMap<>();
 
@@ -40,6 +40,11 @@ public class PokerHands {
         // Check if hand contains only one pair
         boolean isTwoPairs = playerHand.values().stream().filter(suit -> suit.length() == 2).count() == 2 && countValues == 3;
 
+        // Check if hand contains 3 cards with same value
+        boolean isThreeOfaKind = playerHand.values().stream().filter(suit -> suit.length() == 3).count() == 1 && countValues == 3;
+
+        if (isThreeOfaKind)
+            return Rank.THREE_OF_A_KIND;
         if (isTwoPairs)
             return Rank.TWO_PAIRS;
         if (isOnePair)
