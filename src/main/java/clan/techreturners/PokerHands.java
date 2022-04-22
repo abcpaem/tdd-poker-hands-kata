@@ -35,20 +35,21 @@ public class PokerHands {
         boolean isSameSuit = handSuits.stream().distinct().count() <= 1 && countValues == 5;
 
         // Check if hand contains only one pair
-        boolean isOnePair = playerHand.values().stream().filter(suit -> suit.length() == 2).count() == 1 && countValues == 4;
+        var containsOnePair = playerHand.values().stream().filter(suit -> suit.length() == 2).count() == 1;
+        boolean isOnePair = containsOnePair && countValues == 4;
 
-        // Check if hand contains only one pair
+        // Check if hand contains two pairs
         boolean isTwoPairs = playerHand.values().stream().filter(suit -> suit.length() == 2).count() == 2 && countValues == 3;
 
         // Check if hand contains 3 cards with same value
-        boolean isThreeOfaKind = playerHand.values().stream().filter(suit -> suit.length() == 3).count() == 1 && countValues == 3;
+        var containsThreeOfaKind = playerHand.values().stream().filter(suit -> suit.length() == 3).count() == 1;
+        boolean isThreeOfaKind = containsThreeOfaKind && countValues == 3;
 
         // Check if hand contains 5 cards of the same suit
         boolean isFlush = handSuits.stream().allMatch(playerHand.firstEntry().getValue()::equals) && countValues == 5;
 
         // Check if hand contains 3 cards of the same value, with the remaining 2 cards forming a pair
-        boolean isFullHouse = playerHand.values().stream().filter(suit -> suit.length() == 3).count() == 1
-                && playerHand.values().stream().filter(suit -> suit.length() == 2).count() == 1 && countValues == 2;
+        boolean isFullHouse = containsThreeOfaKind && containsOnePair && countValues == 2;
 
         if (isFullHouse)
             return Rank.FULL_HOUSE;

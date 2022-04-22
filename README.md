@@ -34,6 +34,7 @@ Instead of going straight to compare two poker hands as the suggested test cases
 6) Add test for *Straight* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults06.html).
 7) Add test for *Flush* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults07.html).
 8) Add test for *Full house* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults08.html).
+9) Refactor code for Pair, Three of a Kind and Full House ranks. See all tests passing [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults09.html).
 
 
 ---
