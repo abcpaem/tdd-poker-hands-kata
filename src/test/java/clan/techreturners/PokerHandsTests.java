@@ -29,4 +29,16 @@ public class PokerHandsTests {
         // Assert
         assertEquals(Rank.PAIR, rank);
     }
+
+    @Test
+    void checkHandForTwoPairs() {
+        // Arrange
+        String hand = "5H 5S 3D 3C KD";
+
+        // Act
+        Rank rank = new PokerHands().getRank(hand);
+
+        // Assert
+        assertEquals(Rank.TWO_PAIRS, rank);
+    }
 }

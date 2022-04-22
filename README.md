@@ -28,6 +28,7 @@ Instead of going straight to compare two poker hands as the suggested test cases
 
 1) Add a test to check if a poker hand is ranked as *High Card*. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults01.html).
 2) Add test for poker hand ranked as *Pair*. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults02.html).
+3) Add test for *Two Pairs* rank. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults03.html).
 
 
 ---

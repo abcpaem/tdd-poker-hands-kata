@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PokerHands {
-    public enum Rank {UNKNOWN, HIGH_CARD, PAIR;}
+    public enum Rank {UNKNOWN, HIGH_CARD, PAIR, TWO_PAIRS;}
 
     HashMap<Character, Integer> cardValue = new HashMap<>();
 
@@ -37,6 +37,11 @@ public class PokerHands {
         // Check if hand contains only one pair
         boolean isOnePair = playerHand.values().stream().filter(suit -> suit.length() == 2).count() == 1 && countValues == 4;
 
+        // Check if hand contains only one pair
+        boolean isTwoPairs = playerHand.values().stream().filter(suit -> suit.length() == 2).count() == 2 && countValues == 3;
+
+        if (isTwoPairs)
+            return Rank.TWO_PAIRS;
         if (isOnePair)
             return Rank.PAIR;
         if (!isStraight && !isSameSuit)
