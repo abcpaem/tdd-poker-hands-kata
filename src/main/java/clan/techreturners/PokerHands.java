@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PokerHands {
-    public enum Rank {UNKNOWN, HIGH_CARD;}
+    public enum Rank {UNKNOWN, HIGH_CARD, PAIR;}
 
     HashMap<Character, Integer> cardValue = new HashMap<>();
 
@@ -23,16 +23,22 @@ public class PokerHands {
         var playerHand = getPlayerHand(cards);
         var handValues = playerHand.keySet();
         var handSuits = playerHand.values();
+        var countValues = handValues.size();
 
         // Check if hand contains 5 cards with consecutive values
         var consecutiveValues = IntStream.iterate((Integer) handValues.toArray()[0], i -> i + 1)
-                .limit(handValues.size()).boxed()
+                .limit(countValues).boxed()
                 .collect(Collectors.toList());
-        boolean isStraight = new ArrayList<>(handValues).equals(consecutiveValues) && handValues.size() == 5;
+        boolean isStraight = new ArrayList<>(handValues).equals(consecutiveValues) && countValues == 5;
 
         // Check if hand contains 5 cards of the same suit
-        boolean isSameSuit = handSuits.stream().distinct().count() <= 1 && handValues.size() == 5;
+        boolean isSameSuit = handSuits.stream().distinct().count() <= 1 && countValues == 5;
 
+        // Check if hand contains only one pair
+        boolean isOnePair = playerHand.values().stream().filter(suit -> suit.length() == 2).count() == 1 && countValues == 4;
+
+        if (isOnePair)
+            return Rank.PAIR;
         if (!isStraight && !isSameSuit)
             return Rank.HIGH_CARD;
 
