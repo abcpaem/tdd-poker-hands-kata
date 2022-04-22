@@ -1,44 +1,18 @@
 package clan.techreturners;
 
-import clan.techreturners.PokerHands.Rank;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PokerHandsTests {
-    @Test
-    void checkHandForHighCard() {
-        // Arrange
-        String hand = "2H 5S 3D 9C KD";
-
-        // Act
-        Rank rank = new PokerHands().getRank(hand);
-
-        // Assert
-        assertEquals(Rank.HIGH_CARD, rank);
-    }
-
-    @Test
-    void checkHandForPair() {
-        // Arrange
-        String hand = "2H 5S 3D 3C KD";
-
-        // Act
-        Rank rank = new PokerHands().getRank(hand);
-
-        // Assert
-        assertEquals(Rank.PAIR, rank);
-    }
-
-    @Test
-    void checkHandForTwoPairs() {
-        // Arrange
-        String hand = "5H 5S 3D 3C KD";
-
-        // Act
-        Rank rank = new PokerHands().getRank(hand);
-
-        // Assert
-        assertEquals(Rank.TWO_PAIRS, rank);
+    @ParameterizedTest(name = "{index}) For hand \"{0}\", its rank is {1}")
+    @CsvSource(delimiterString = "->", textBlock = """
+            2H 5S 3D 9C KD -> HIGH_CARD
+            2H 5S 3D 3C KD -> PAIR
+            5H 5S 3D 3C KD -> TWO_PAIRS
+            """)
+    void checkHandForRank(String hand, PokerHands.Rank expectedRank) {
+        assertEquals(expectedRank, new PokerHands().getRank(hand));
     }
 }
