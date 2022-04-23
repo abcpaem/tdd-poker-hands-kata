@@ -7,7 +7,7 @@ A Kata in martial arts means “a system of individual training exercises”. Ju
 
 ### What is the goal?
 
-Plan out and have a go at the Poker Hands Kata using Test-Driven Development. It is not expected to have a finished solution but have had a good go at using Test-Driven Development.
+Implement the Poker Hands Kata using Test-Driven Development.
 
 ### Instructions
 
