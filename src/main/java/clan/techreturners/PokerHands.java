@@ -196,7 +196,7 @@ public class PokerHands {
             } else if (rank == Rank.TWO_PAIRS) {
                 int[] pairs = getPairs();
                 winCards += String.format("%s and %s", getCardName(pairs[0]), getCardName(pairs[1])) + (!highestCard.isEmpty() ? " and High pair/card: " + highestCard : "");
-            } else if (rank == Rank.STRAIGHT) {
+            } else if (rank == Rank.STRAIGHT || rank == Rank.FLUSH) {
                 winCards = this.rank + highCard;
             } else winCards += this.winningCards;
 
