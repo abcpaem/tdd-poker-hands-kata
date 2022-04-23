@@ -32,23 +32,29 @@ public class PokerHands {
         if (winner == null) {
             if (p1.rank == Rank.PAIR) {
                 winner = p1.getPair() > p2.getPair() ? p1 : p1.getPair() < p2.getPair() ? p2 : null;
+            } else if (p1.rank == Rank.TWO_PAIRS) {
+                winner = getWinnerWithHighestCards(p1.getPairs(), p2.getPairs(), p1, p2);
             }
 
             // Highest card will be the winner
             if (winner == null) {
-                int[] p1Values = p1.getValues();
-                int[] p2Values = p2.getValues();
-                for (int i = p1Values.length - 1; i >= 0; i--) {
-                    if (p1Values[i] > p2Values[i]) {
-                        p1.setHighestCard(p1Values[i]);
-                        winner = p1;
-                        break;
-                    } else if (p1Values[i] < p2Values[i]) {
-                        p2.setHighestCard(p2Values[i]);
-                        winner = p2;
-                        break;
-                    }
-                }
+                winner = getWinnerWithHighestCards(p1.getValues(), p2.getValues(), p1, p2);
+            }
+        }
+        return winner;
+    }
+
+    private Player getWinnerWithHighestCards(int[] p1Values, int[] p2Values, Player p1, Player p2) {
+        Player winner = null;
+        for (int i = p1Values.length - 1; i >= 0; i--) {
+            if (p1Values[i] > p2Values[i]) {
+                p1.setHighestCard(p1Values[i]);
+                winner = p1;
+                break;
+            } else if (p1Values[i] < p2Values[i]) {
+                p2.setHighestCard(p2Values[i]);
+                winner = p2;
+                break;
             }
         }
         return winner;
@@ -143,10 +149,13 @@ public class PokerHands {
         private void setWinningCards() {
             if (rank == Rank.FULL_HOUSE) {
                 this.winningCards = String.format("%s over %s",
-                        hand.entrySet().stream().filter(s -> s.getValue().length() == 3).findFirst().get().getKey().toString(),
-                        hand.entrySet().stream().filter(s -> s.getValue().length() == 2).findFirst().get().getKey().toString());
+                        getCardName(hand.entrySet().stream().filter(s -> s.getValue().length() == 3).findFirst().get().getKey()),
+                        getCardName(hand.entrySet().stream().filter(s -> s.getValue().length() == 2).findFirst().get().getKey()));
             } else if (rank == Rank.PAIR) {
-                this.winningCards = "" + getPair();
+                this.winningCards = "" + getCardName(getPair());
+            } else if (rank == Rank.TWO_PAIRS) {
+                int[] pairs = getPairs();
+                this.winningCards = String.format("%s and %s", getCardName(pairs[0]), getCardName(pairs[1]));
             }
         }
 
@@ -154,8 +163,16 @@ public class PokerHands {
             return hand.entrySet().stream().filter(s -> s.getValue().length() == 2).findFirst().get().getKey();
         }
 
+        private int[] getPairs() {
+            return hand.entrySet().stream().filter(s -> s.getValue().length() == 2).map(Map.Entry::getKey).mapToInt(Integer::valueOf).toArray();
+        }
+
         private void setHighestCard(int value) {
-            this.highestCard = switch (value) {
+            this.highestCard = getCardName(value);
+        }
+
+        private String getCardName(int value) {
+            return switch (value) {
                 case 11 -> "Jack";
                 case 12 -> "Queen";
                 case 13 -> "King";
@@ -164,12 +181,16 @@ public class PokerHands {
             };
         }
 
-        public String getWinningCards() {
+        private String getWinningCards() {
             String winCards = this.rank + ": ";
 
             if (rank == Rank.HIGH_CARD) winCards += highestCard;
             else if (rank == Rank.PAIR)
                 winCards += getPair() + (!highestCard.isEmpty() ? " and High card: " + highestCard : "");
+            else if (rank == Rank.TWO_PAIRS) {
+                int[] pairs = getPairs();
+                winCards += String.format("%s and %s", getCardName(pairs[0]), getCardName(pairs[1])) + (!highestCard.isEmpty() ? " and High pair/card: " + highestCard : "");
+            }
             else winCards += this.winningCards;
 
             return winCards;
