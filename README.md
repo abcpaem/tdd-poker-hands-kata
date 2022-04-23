@@ -53,6 +53,10 @@ Instead of going straight to compare two poker hands as the suggested test cases
 25) Add test for *Four of a kind* winner with the highest 4 cards. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults25.html).
 26) Add test for *Straight flush* winner with the highest card. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults26.html).
 
+Finally, you can see all the tests passing [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResultsAll.html).
+
+### What's next?:
+- Add *main* method to run the solution as a console application.
 
 ---
 ## How to run the tests
