@@ -23,12 +23,11 @@ public class PokerHands {
 
     public String getWinner(String firsthand, String secondHand) {
         Player winner = getWinner(new Player(firsthand, PLAYER1), new Player(secondHand, PLAYER2));
-
         return winner == null ? TIE_MSG : format(WINNING_MSG, winner.name, winner.getWinningCards());
     }
 
     public Rank getRank(String hand) {
-        return new Player(hand, "").rank;
+        return new Player(hand).rank;
     }
 
     private Player getWinner(Player p1, Player p2) {
@@ -80,6 +79,10 @@ public class PokerHands {
         private final static HashMap<Character, Integer> cardValue = new HashMap<>();
         private String highestCard = "";
         private String winningCards = "";
+
+        private Player(String hand) {
+            this(hand, "");
+        }
 
         private Player(String hand, String name) {
             for (int i = 2; i < 10; i++) cardValue.put((char) (i + '0'), i);
