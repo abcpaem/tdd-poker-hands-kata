@@ -148,14 +148,14 @@ public class PokerHands {
 
         private void setWinningCards() {
             if (rank == Rank.FULL_HOUSE) {
-                this.winningCards = String.format("%s over %s",
-                        getCardName(hand.entrySet().stream().filter(s -> s.getValue().length() == 3).findFirst().get().getKey()),
-                        getCardName(hand.entrySet().stream().filter(s -> s.getValue().length() == 2).findFirst().get().getKey()));
-            } else if (rank == Rank.PAIR) {
-                this.winningCards = "" + getCardName(getPair());
+                this.winningCards = String.format("%s over %s", getCardName(getThreeOfaKind()), getCardName(getPair()));
+            } else if (rank == Rank.THREE_OF_A_KIND) {
+                this.winningCards = "" + getCardName(getThreeOfaKind());
             } else if (rank == Rank.TWO_PAIRS) {
                 int[] pairs = getPairs();
                 this.winningCards = String.format("%s and %s", getCardName(pairs[0]), getCardName(pairs[1]));
+            } else if (rank == Rank.PAIR) {
+                this.winningCards = "" + getCardName(getPair());
             }
         }
 
@@ -165,6 +165,10 @@ public class PokerHands {
 
         private int[] getPairs() {
             return hand.entrySet().stream().filter(s -> s.getValue().length() == 2).map(Map.Entry::getKey).mapToInt(Integer::valueOf).toArray();
+        }
+
+        private int getThreeOfaKind() {
+            return hand.entrySet().stream().filter(s -> s.getValue().length() == 3).findFirst().get().getKey();
         }
 
         private void setHighestCard(int value) {
@@ -184,14 +188,14 @@ public class PokerHands {
         private String getWinningCards() {
             String winCards = this.rank + ": ";
 
-            if (rank == Rank.HIGH_CARD) winCards += highestCard;
-            else if (rank == Rank.PAIR)
+            if (rank == Rank.HIGH_CARD) {
+                winCards += highestCard;
+            } else if (rank == Rank.PAIR) {
                 winCards += getPair() + (!highestCard.isEmpty() ? " and High card: " + highestCard : "");
-            else if (rank == Rank.TWO_PAIRS) {
+            } else if (rank == Rank.TWO_PAIRS) {
                 int[] pairs = getPairs();
                 winCards += String.format("%s and %s", getCardName(pairs[0]), getCardName(pairs[1])) + (!highestCard.isEmpty() ? " and High pair/card: " + highestCard : "");
-            }
-            else winCards += this.winningCards;
+            } else winCards += this.winningCards;
 
             return winCards;
         }

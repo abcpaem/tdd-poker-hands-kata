@@ -32,6 +32,7 @@ public class PokerHandsTests {
             2H 2D 5S 9C KD, 2C 2S 3C 9S KH, Player 1 wins. With Pair: 2 and High card: 5
             JH JD KS KC 8D, KD 2H 2C KH AH, Player 1 wins. With Two pairs: Jack and King and High pair/card: Jack
             JH JD KS KC 8D, KD JC JS KH AH, Player 2 wins. With Two pairs: Jack and King and High pair/card: Ace
+            TH TD TS 9C KD, 8D 8H 8C 9S KH, Player 1 wins. With Three of a kind: 10
             """)
     void checkWinnerForTwoHands(String firsthand, String secondHand, String expectedResult) {
         assertEquals(expectedResult, new PokerHands().getWinner(firsthand, secondHand));
