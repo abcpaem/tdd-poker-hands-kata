@@ -34,6 +34,8 @@ public class PokerHands {
                 winner = p1.getPair() > p2.getPair() ? p1 : p1.getPair() < p2.getPair() ? p2 : null;
             } else if (p1.rank == Rank.TWO_PAIRS) {
                 winner = getWinnerWithHighestCards(p1.getPairs(), p2.getPairs(), p1, p2);
+            } else if (p1.rank == Rank.FULL_HOUSE) {
+                winner = p1.getThreeOfaKind() > p2.getThreeOfaKind() ? p1 : p1.getThreeOfaKind() < p2.getThreeOfaKind() ? p2 : null;
             }
 
             // Highest card will be the winner

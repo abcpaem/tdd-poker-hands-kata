@@ -49,6 +49,7 @@ Instead of going straight to compare two poker hands as the suggested test cases
 21) Add test for *Three of a kind* winner with the highest value of the 3 cards. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults21.html).
 22) Add test for *Straight* winner with the highest card. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults22.html).
 23) Add test for *Flush* winner with the highest card. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults23.html).
+24) Add test for *Full house* winner with the highest 3 cards. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults24.html).
 
 
 ---
