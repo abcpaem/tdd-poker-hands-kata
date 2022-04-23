@@ -29,6 +29,7 @@ public class PokerHandsTests {
             2H 3D 5S 9C KD, 2C 3H 4S 8C KH, Player 1 wins. With High card: 9
             2H 3D 5S 9C KD, 2D 3H 5C 9S KH, Tie.
             2H 2D 5S 9C KD, 2D 3H 3C 9S KH, Player 2 wins. With Pair: 3
+            2H 2D 5S 9C KD, 2C 2S 3C 9S KH, Player 1 wins. With Pair: 2 and High card: 5
             """)
     void checkWinnerForTwoHands(String firsthand, String secondHand, String expectedResult) {
         assertEquals(expectedResult, new PokerHands().getWinner(firsthand, secondHand));

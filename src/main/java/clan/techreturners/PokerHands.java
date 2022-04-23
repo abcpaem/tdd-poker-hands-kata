@@ -19,7 +19,7 @@ public class PokerHands {
     public String getWinner(String firsthand, String secondHand) {
         Player winner = getWinner(new Player(firsthand, "Player 1"), new Player(secondHand, "Player 2"));
 
-        return winner == null ? "Tie." : format("%s wins. With %s: %s", winner.name, winner.rank, winner.winningCards);
+        return winner == null ? "Tie." : format("%s wins. With %s", winner.name, winner.getWinningCards());
     }
 
     public Rank getRank(String hand) {
@@ -40,11 +40,11 @@ public class PokerHands {
                 int[] p2Values = p2.getValues();
                 for (int i = p1Values.length - 1; i >= 0; i--) {
                     if (p1Values[i] > p2Values[i]) {
-                        p1.setWinningCards(p1Values[i]);
+                        p1.setHighestCard(p1Values[i]);
                         winner = p1;
                         break;
                     } else if (p1Values[i] < p2Values[i]) {
-                        p2.setWinningCards(p2Values[i]);
+                        p2.setHighestCard(p2Values[i]);
                         winner = p2;
                         break;
                     }
@@ -59,6 +59,7 @@ public class PokerHands {
         private final String name;
         private final TreeMap<Integer, String> hand;
         private final static HashMap<Character, Integer> cardValue = new HashMap<>();
+        private String highestCard = "";
         private String winningCards = "";
 
         private Player(String hand, String name) {
@@ -153,14 +154,25 @@ public class PokerHands {
             return hand.entrySet().stream().filter(s -> s.getValue().length() == 2).findFirst().get().getKey();
         }
 
-        private void setWinningCards(int value) {
-            this.winningCards = switch (value) {
+        private void setHighestCard(int value) {
+            this.highestCard = switch (value) {
                 case 11 -> "Jack";
                 case 12 -> "Queen";
                 case 13 -> "King";
                 case 14 -> "Ace";
                 default -> "" + value;
             };
+        }
+
+        public String getWinningCards() {
+            String winCards = this.rank + ": ";
+
+            if (rank == Rank.HIGH_CARD) winCards += highestCard;
+            else if (rank == Rank.PAIR)
+                winCards += getPair() + (!highestCard.isEmpty() ? " and High card: " + highestCard : "");
+            else winCards += this.winningCards;
+
+            return winCards;
         }
     }
 }
