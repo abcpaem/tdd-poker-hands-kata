@@ -7,6 +7,11 @@ import java.util.stream.IntStream;
 import static java.lang.String.*;
 
 public class PokerHands {
+    private static final String PLAYER1 = "Player 1";
+    private static final String PLAYER2 = "Player 2";
+    private static final String TIE_MSG = "Tie.";
+    private static final String WINNING_MSG = "%s wins. With %s";
+
     public enum Rank {
         UNKNOWN, HIGH_CARD, PAIR, TWO_PAIRS, THREE_OF_A_KIND, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_A_KIND, STRAIGHT_FLUSH;
 
@@ -17,9 +22,9 @@ public class PokerHands {
     }
 
     public String getWinner(String firsthand, String secondHand) {
-        Player winner = getWinner(new Player(firsthand, "Player 1"), new Player(secondHand, "Player 2"));
+        Player winner = getWinner(new Player(firsthand, PLAYER1), new Player(secondHand, PLAYER2));
 
-        return winner == null ? "Tie." : format("%s wins. With %s", winner.name, winner.getWinningCards());
+        return winner == null ? TIE_MSG : format(WINNING_MSG, winner.name, winner.getWinningCards());
     }
 
     public Rank getRank(String hand) {
@@ -65,6 +70,10 @@ public class PokerHands {
     }
 
     private class Player {
+        private static final String FULL_HOUSE_MSG = "%s over %s";
+        private static final String TWO_CARDS_MSG = "%s and %s";
+        private static final String HIGH_CARD_MSG = " and High card: ";
+        private static final String PAIR_HIGH_CARD_MSG = " and High pair/card: ";
         private final Rank rank;
         private final String name;
         private final TreeMap<Integer, String> hand;
@@ -152,14 +161,14 @@ public class PokerHands {
 
         private void setWinningCards() {
             if (rank == Rank.FULL_HOUSE) {
-                this.winningCards = String.format("%s over %s", getCardName(getThreeOfaKind()), getCardName(getPair()));
+                this.winningCards = String.format(FULL_HOUSE_MSG, getCardName(getThreeOfaKind()), getCardName(getPair()));
             } else if (rank == Rank.FOUR_OF_A_KIND) {
                 this.winningCards = "" + getCardName(getFourOfaKind());
             } else if (rank == Rank.THREE_OF_A_KIND) {
                 this.winningCards = "" + getCardName(getThreeOfaKind());
             } else if (rank == Rank.TWO_PAIRS) {
                 int[] pairs = getPairs();
-                this.winningCards = String.format("%s and %s", getCardName(pairs[0]), getCardName(pairs[1]));
+                this.winningCards = String.format(TWO_CARDS_MSG, getCardName(pairs[0]), getCardName(pairs[1]));
             } else if (rank == Rank.PAIR) {
                 this.winningCards = "" + getCardName(getPair());
             }
@@ -197,7 +206,7 @@ public class PokerHands {
 
         private String getWinningCards() {
             String winCards = this.rank + ": ";
-            String highCard = !highestCard.isEmpty() ? " and High card: " + highestCard : "";
+            String highCard = !highestCard.isEmpty() ? HIGH_CARD_MSG + highestCard : "";
 
             if (rank == Rank.HIGH_CARD) {
                 winCards += highestCard;
@@ -205,7 +214,7 @@ public class PokerHands {
                 winCards += getPair() + highCard;
             } else if (rank == Rank.TWO_PAIRS) {
                 int[] pairs = getPairs();
-                winCards += String.format("%s and %s", getCardName(pairs[0]), getCardName(pairs[1])) + (!highestCard.isEmpty() ? " and High pair/card: " + highestCard : "");
+                winCards += String.format(TWO_CARDS_MSG, getCardName(pairs[0]), getCardName(pairs[1])) + (!highestCard.isEmpty() ? PAIR_HIGH_CARD_MSG + highestCard : "");
             } else if (rank == Rank.STRAIGHT || rank == Rank.FLUSH || rank == Rank.STRAIGHT_FLUSH) {
                 winCards = this.rank + highCard;
             } else winCards += this.winningCards;
