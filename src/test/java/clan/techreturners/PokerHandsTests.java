@@ -37,6 +37,7 @@ public class PokerHandsTests {
             5C JC TC KC 6C, 3H 2H 8H 9H TH, Player 1 wins. With Flush and High card: King
             KH 4S 4C KD 4H, QS 3S QH QC 3H, Player 2 wins. With Full house: Queen over 3
             6H 6S 6C 6D TH, 3D 3S 3H 3C KH, Player 1 wins. With Four of a kind: 6
+            3H 2H 4H 5H 6H, 4C 3C 5C 7C 6C, Player 2 wins. With Straight flush and High card: 7
             """)
     void checkWinnerForTwoHands(String firsthand, String secondHand, String expectedResult) {
         assertEquals(expectedResult, new PokerHands().getWinner(firsthand, secondHand));
