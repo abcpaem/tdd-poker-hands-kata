@@ -45,6 +45,7 @@ Instead of going straight to compare two poker hands as the suggested test cases
 17) Add test for *Pair* winner with the highest pair. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults17.html).
 18) Add test for *Pair* winner with same pair and the highest card. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults18.html).
 19) Add test for *Two Pairs* winner with the second-highest pair. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults19.html).
+20) Add test for *Two Pairs* winner with same two pairs and the highest card. See test [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResults20.html).
 
 
 ---
