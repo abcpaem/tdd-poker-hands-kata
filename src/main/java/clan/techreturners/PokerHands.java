@@ -187,14 +187,17 @@ public class PokerHands {
 
         private String getWinningCards() {
             String winCards = this.rank + ": ";
+            String highCard = !highestCard.isEmpty() ? " and High card: " + highestCard : "";
 
             if (rank == Rank.HIGH_CARD) {
                 winCards += highestCard;
             } else if (rank == Rank.PAIR) {
-                winCards += getPair() + (!highestCard.isEmpty() ? " and High card: " + highestCard : "");
+                winCards += getPair() + highCard;
             } else if (rank == Rank.TWO_PAIRS) {
                 int[] pairs = getPairs();
                 winCards += String.format("%s and %s", getCardName(pairs[0]), getCardName(pairs[1])) + (!highestCard.isEmpty() ? " and High pair/card: " + highestCard : "");
+            } else if (rank == Rank.STRAIGHT) {
+                winCards = this.rank + highCard;
             } else winCards += this.winningCards;
 
             return winCards;
