@@ -36,6 +36,8 @@ public class PokerHands {
                 winner = getWinnerWithHighestCards(p1.getPairs(), p2.getPairs(), p1, p2);
             } else if (p1.rank == Rank.FULL_HOUSE) {
                 winner = p1.getThreeOfaKind() > p2.getThreeOfaKind() ? p1 : p1.getThreeOfaKind() < p2.getThreeOfaKind() ? p2 : null;
+            } else if (p1.rank == Rank.FOUR_OF_A_KIND) {
+                winner = p1.getFourOfaKind() > p2.getFourOfaKind() ? p1 : p1.getFourOfaKind() < p2.getFourOfaKind() ? p2 : null;
             }
 
             // Highest card will be the winner
@@ -151,6 +153,8 @@ public class PokerHands {
         private void setWinningCards() {
             if (rank == Rank.FULL_HOUSE) {
                 this.winningCards = String.format("%s over %s", getCardName(getThreeOfaKind()), getCardName(getPair()));
+            } else if (rank == Rank.FOUR_OF_A_KIND) {
+                this.winningCards = "" + getCardName(getFourOfaKind());
             } else if (rank == Rank.THREE_OF_A_KIND) {
                 this.winningCards = "" + getCardName(getThreeOfaKind());
             } else if (rank == Rank.TWO_PAIRS) {
@@ -171,6 +175,10 @@ public class PokerHands {
 
         private int getThreeOfaKind() {
             return hand.entrySet().stream().filter(s -> s.getValue().length() == 3).findFirst().get().getKey();
+        }
+
+        private int getFourOfaKind() {
+            return hand.entrySet().stream().filter(s -> s.getValue().length() == 4).findFirst().get().getKey();
         }
 
         private void setHighestCard(int value) {
