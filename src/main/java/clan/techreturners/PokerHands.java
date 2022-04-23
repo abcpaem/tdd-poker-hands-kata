@@ -30,17 +30,24 @@ public class PokerHands {
         Player winner = p1.rank.ordinal() > p2.rank.ordinal() ? p1 : p1.rank == p2.rank ? null : p2;
 
         if (winner == null) {
-            int[] p1Values = p1.getValues();
-            int[] p2Values = p2.getValues();
-            for (int i = p1Values.length - 1; i >= 0; i--) {
-                if (p1Values[i] > p2Values[i]) {
-                    p1.setWinningCards(p1Values[i]);
-                    winner = p1;
-                    break;
-                } else if (p1Values[i] < p2Values[i]) {
-                    p2.setWinningCards(p2Values[i]);
-                    winner = p2;
-                    break;
+            if (p1.rank == Rank.PAIR) {
+                winner = p1.getPair() > p2.getPair() ? p1 : p1.getPair() < p2.getPair() ? p2 : null;
+            }
+
+            // Highest card will be the winner
+            if (winner == null) {
+                int[] p1Values = p1.getValues();
+                int[] p2Values = p2.getValues();
+                for (int i = p1Values.length - 1; i >= 0; i--) {
+                    if (p1Values[i] > p2Values[i]) {
+                        p1.setWinningCards(p1Values[i]);
+                        winner = p1;
+                        break;
+                    } else if (p1Values[i] < p2Values[i]) {
+                        p2.setWinningCards(p2Values[i]);
+                        winner = p2;
+                        break;
+                    }
                 }
             }
         }
@@ -52,7 +59,7 @@ public class PokerHands {
         private final String name;
         private final TreeMap<Integer, String> hand;
         private final static HashMap<Character, Integer> cardValue = new HashMap<>();
-        private String winningCards;
+        private String winningCards = "";
 
         private Player(String hand, String name) {
             for (int i = 2; i < 10; i++) cardValue.put((char) (i + '0'), i);
@@ -137,7 +144,13 @@ public class PokerHands {
                 this.winningCards = String.format("%s over %s",
                         hand.entrySet().stream().filter(s -> s.getValue().length() == 3).findFirst().get().getKey().toString(),
                         hand.entrySet().stream().filter(s -> s.getValue().length() == 2).findFirst().get().getKey().toString());
+            } else if (rank == Rank.PAIR) {
+                this.winningCards = "" + getPair();
             }
+        }
+
+        private int getPair() {
+            return hand.entrySet().stream().filter(s -> s.getValue().length() == 2).findFirst().get().getKey();
         }
 
         private void setWinningCards(int value) {
