@@ -111,36 +111,35 @@ public class PokerHands {
         private Rank getRank(TreeMap<Integer, String> hand) {
             var handValues = hand.keySet();
             var handSuits = hand.values();
-            var countValues = handValues.size();
 
             // Check if hand contains 5 cards with consecutive values
             var consecutiveValues = IntStream.iterate((Integer) handValues.toArray()[0], i -> i + 1)
-                    .limit(countValues).boxed()
+                    .limit(handValues.size()).boxed()
                     .collect(Collectors.toList());
-            boolean isStraight = new ArrayList<>(handValues).equals(consecutiveValues) && countValues == 5;
+            boolean isStraight = new ArrayList<>(handValues).equals(consecutiveValues);
 
             // Check if hand contains 5 cards of the same suit
-            boolean isSameSuit = handSuits.stream().distinct().count() <= 1 && countValues == 5;
+            boolean isSameSuit = handSuits.stream().distinct().count() <= 1;
 
             // Check if hand contains only one pair
             var containsOnePair = handSuits.stream().filter(s -> s.length() == 2).count() == 1;
-            boolean isOnePair = containsOnePair && countValues == 4;
+            boolean isOnePair = containsOnePair;
 
             // Check if hand contains two pairs
-            boolean isTwoPairs = handSuits.stream().filter(s -> s.length() == 2).count() == 2 && countValues == 3;
+            boolean isTwoPairs = handSuits.stream().filter(s -> s.length() == 2).count() == 2;
 
             // Check if hand contains 3 cards with same value
             var containsThreeOfaKind = handSuits.stream().filter(s -> s.length() == 3).count() == 1;
-            boolean isThreeOfaKind = containsThreeOfaKind && countValues == 3;
+            boolean isThreeOfaKind = containsThreeOfaKind;
 
             // Check if hand contains 5 cards of the same suit
-            boolean isFlush = handSuits.stream().allMatch(hand.firstEntry().getValue()::equals) && countValues == 5;
+            boolean isFlush = handSuits.stream().allMatch(hand.firstEntry().getValue()::equals);
 
             // Check if hand contains 3 cards of the same value, with the remaining 2 cards forming a pair
-            boolean isFullHouse = containsThreeOfaKind && containsOnePair && countValues == 2;
+            boolean isFullHouse = containsThreeOfaKind && containsOnePair;
 
             // Check if hand contains 4 cards with the same value
-            boolean isFourOfaKind = handSuits.stream().filter(s -> s.length() == 4).count() == 1 && countValues == 2;
+            boolean isFourOfaKind = handSuits.stream().filter(s -> s.length() == 4).count() == 1;
 
             // Check if hand contains 5 cards of the same suit with consecutive values
             boolean isStraightFlush = isStraight && isSameSuit;
