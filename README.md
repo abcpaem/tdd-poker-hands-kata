@@ -56,11 +56,18 @@ Instead of going straight to compare two poker hands as the suggested test cases
 Finally, you can see all the tests passing [here](https://htmlview.glitch.me/?https://github.com/abcpaem/tdd-poker-hands-kata/blob/main/docs/TestResultsAll.html).
 
 ### What's next?:
-- Add *main* method to run the solution as a console application.
+- Add exception message when a card is invalid for any of following reasons:
+  - It doesn't exist in a poker deck.
+  - It is duplicated.
+- Validate that a hand contains 5 cards.
 
 ---
-## How to run the tests
-- cd to the project root folder in the command line
+### How to run the application
+1) cd to the project root folder in the command line
+2) `mvn compile`
+3) `mvn exec:java -Dexec.mainClass=clan.techreturners.Main`
+
+To run tests use:
 - ``mvn test``
 
 ## Technology
