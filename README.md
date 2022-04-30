@@ -65,7 +65,7 @@ Finally, you can see all the tests passing [here](https://htmlview.glitch.me/?ht
 ### How to run the application
 1) cd to the project root folder in the command line
 2) `mvn compile`
-3) `mvn exec:java -Dexec.mainClass=clan.techreturners.Main`
+3) `mvn exec:java -Dexec.mainClass=clan.techreturners.poker.Main`
 
 To run tests use:
 - ``mvn test``

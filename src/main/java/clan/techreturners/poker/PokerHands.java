@@ -1,4 +1,4 @@
-package clan.techreturners;
+package clan.techreturners.poker;
 
 import java.util.*;
 import java.util.stream.Collectors;
